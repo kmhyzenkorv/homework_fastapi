@@ -3,38 +3,38 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-class Number_of_brigade(BaseModel):
+class NumberOfBrigade(BaseModel):
     id: int
     name: str
 
-class Team_work_experience(BaseModel):
+class TeamWorkExperience(BaseModel):
     id: int
     name: str
     experience: float
 
-class User_info(BaseModel):
+class UserInfo(BaseModel):
     id: int
     login: str
 
-Number_of_brigade_db = [
+NUMBER_OF_BRIGADE_DB = [
 
-    Number_of_brigade(id= 1, name="Бригада Чижики"),
-    Number_of_brigade(id= 2, name="Строй Гастрики"),
-    Number_of_brigade(id= 3, name="Демодворики"),
+    NumberOfBrigade(id= 1, name="Бригада Чижики"),
+    NumberOfBrigade(id= 2, name="Строй Гастрики"),
+    NumberOfBrigade(id= 3, name="Демодворики"),
 ]
 
-Team_work_experience_db = [
+TEAM_WORK_EXPERIENCE_DB = [
 
-    Team_work_experience(id= 1, name= "Бригада Чижики", experience= 5.5),
-    Team_work_experience(id= 2, name="Строй Гастрики", experience= 3.0),
-    Team_work_experience(id= 3, name="Демодворики", experience= 1.243),
+    TeamWorkExperience(id= 1, name= "Бригада Чижики", experience= 5.5),
+    TeamWorkExperience(id= 2, name="Строй Гастрики", experience= 3.0),
+    TeamWorkExperience(id= 3, name="Демодворики", experience= 1.243),
 ]
 
-User_info_db = [
+USER_INFO_DB = [
 
-    User_info(id= 1, login="Сергей"),
-    User_info(id= 2, login="Анатолий"),
-    User_info(id= 3, login="Александр"),
+    UserInfo(id= 1, login="Сергей"),
+    UserInfo(id= 2, login="Анатолий"),
+    UserInfo(id= 3, login="Александр"),
 ]
 
 @app.get("/")
@@ -43,31 +43,31 @@ async def root():
 
 
 @app.get("/brigade/{brigade_id}")
-def NofB(brigade_id: int):
-    for brigade in Number_of_brigade_db:
+def number_of_the_brigades(brigade_id: int):
+    for brigade in NUMBER_OF_BRIGADE_DB:
         if brigade.id == brigade_id:
             return brigade
         
 @app.get("/brigade/")
 def brigades():
-    return Team_work_experience_db
+    return TEAM_WORK_EXPERIENCE_DB
 
-@app.get("/user_info/")
+@app.get("/UserInfo/")
 def users():
-    return User_info_db
+    return USER_INFO_DB
 
-@app.get("/user_info/{users_id}")
+@app.get("/UserInfo/{users_id}")
 def users(users_id: int):
-    for users in User_info_db:
+    for users in USER_INFO_DB:
         if users.id == users_id:
             return users
         
 @app.get("/experience/{experience_id}")
-def NofB(experience_id: int):
-    for experience in Team_work_experience_db:
+def experience_of_the_brigades(experience_id: int):
+    for experience in TEAM_WORK_EXPERIENCE_DB:
         if experience.id == experience_id:
             return experience
 
 @app.get("/experience/")
 def users():
-    return Team_work_experience_db
+    return TEAM_WORK_EXPERIENCE_DB
